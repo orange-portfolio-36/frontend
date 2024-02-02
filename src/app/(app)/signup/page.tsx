@@ -13,11 +13,16 @@ export default function SignupForm() {
     },
   });
   return (
-    <div className="flex flex-col items-center justify-center h-full">
+    <div className="flex flex-col items-center justify-center h-full gap-2">
       <Controller
         control={control}
         name="firstName"
-        render={({ field }) => <TextField label={"Nome"} {...field} />}
+        render={({ field }) => <TextField label={"Nome"} size="small" {...field} />}
+      />
+      <Controller
+        control={control}
+        name="lastName"
+        render={({ field }) => <TextField label={"Sobrenome"} size="small" {...field} />}
       />
     </div>
   );
