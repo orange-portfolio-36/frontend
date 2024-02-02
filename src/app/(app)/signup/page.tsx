@@ -17,12 +17,16 @@ export default function SignupForm() {
       <Controller
         control={control}
         name="firstName"
-        render={({ field }) => <TextField label={"Nome"} size="small" {...field} />}
+        render={({ field }) => (
+          <TextField label={"Nome"} size="small" {...field} />
+        )}
       />
       <Controller
         control={control}
         name="lastName"
-        render={({ field }) => <TextField label={"Sobrenome"} size="small" {...field} />}
+        render={({ field }) => (
+          <TextField label={"Sobrenome"} size="small" {...field} />
+        )}
       />
     </div>
   );
