@@ -19,6 +19,12 @@ import {
 import { useState } from "react";
 import Link from "next/link";
 import { IconButton, InputAdornment } from "@mui/material";
+import {
+  CredentialResponse,
+  GoogleLogin,
+  GoogleOAuthProvider,
+} from "@react-oauth/google";
+import { clientId } from "@/config/google.config";
 
 export default function SignupForm() {
   const { control, handleSubmit } = useForm<SigninData>({
@@ -42,6 +48,12 @@ export default function SignupForm() {
     });
   }
 
+  function onGoogleSuccess(credentials: CredentialResponse) {
+    userService.googleLogin(credentials).then(() => {
+      handleSnackOpen();
+    });
+  }
+
   function handleShowPassword() {
     setShowPassword(!showPassword);
   }
@@ -54,96 +66,103 @@ export default function SignupForm() {
     setSnackOpen(false);
   }
   return (
-    <Box {...flexFull}>
-      <Snackbar
-        anchorOrigin={{ vertical, horizontal }}
-        key={vertical + horizontal}
-        open={snackOpen}
-        onClose={onSnackClose}
-        autoHideDuration={3000}
-      >
-        <Alert
+    <GoogleOAuthProvider clientId={clientId ?? ""}>
+      <Box {...flexFull}>
+        <Snackbar
+          anchorOrigin={{ vertical, horizontal }}
+          key={vertical + horizontal}
+          open={snackOpen}
           onClose={onSnackClose}
-          severity="success"
-          icon={<CheckCircleOutline />}
-          variant="filled"
-          sx={{ width: "100%" }}
+          autoHideDuration={3000}
         >
-          Login feito com sucesso
-        </Alert>
-      </Snackbar>
-      <Box {...flexFull} width={"50%"} gap={0}>
-        <Image
-          src={imgSignin}
-          sizes={"100vw"}
-          style={{ width: "100%", height: "auto" }}
-          alt=""
-        />
-      </Box>
-      <Box
-        {...flexFull}
-        gap={2}
-        flexDirection={"column"}
-        alignItems={"center"}
-        justifyContent={"center"}
-      >
-        <Typography fontSize={"48px"}>Entre no Orange Portfólio</Typography>
-        <form onSubmit={handleSubmit(onSubmit)} className="w-[517px]">
-          <Box
-            display={"flex"}
-            width={"100%"}
-            gap={1}
-            justifyContent={"center"}
-            flexDirection={"column"}
+          <Alert
+            onClose={onSnackClose}
+            severity="success"
+            icon={<CheckCircleOutline />}
+            variant="filled"
+            sx={{ width: "100%" }}
           >
-            <Typography fontSize={"24px"} color={"#515255"}>
-              Faça login com email
-            </Typography>
-            <Controller
-              control={control}
-              name="email"
-              render={({ field }) => (
-                <TextField label={"Email"} fullWidth {...field} />
-              )}
-            />
-            <Controller
-              control={control}
-              name="password"
-              render={({ field }) => (
-                <TextField
-                  label={"Senha"}
-                  fullWidth
-                  {...field}
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <IconButton
-                          aria-label="toggle password visibility"
-                          onClick={handleShowPassword}
-                          edge="end"
-                        >
-                          {showPassword ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
-                      </InputAdornment>
-                    ),
-                  }}
-                  type={showPassword ? "text" : "password"}
-                />
-              )}
-            />
-            <Button variant={"contained"} size={"large"} type={"submit"}>
-              Entrar
-            </Button>
-            <Link
-              href={"/signup"}
-              style={{ width: "100%", marginRight: "auto", color: "lightgray" }}
+            Login feito com sucesso
+          </Alert>
+        </Snackbar>
+        <Box {...flexFull} width={"50%"} gap={0}>
+          <Image
+            src={imgSignin}
+            sizes={"100vw"}
+            style={{ width: "100%", height: "auto" }}
+            alt=""
+          />
+        </Box>
+        <Box
+          {...flexFull}
+          gap={2}
+          flexDirection={"column"}
+          alignItems={"center"}
+          justifyContent={"center"}
+        >
+          <Typography fontSize={"48px"}>Entre no Orange Portfólio</Typography>
+          <GoogleLogin onSuccess={onGoogleSuccess}/>
+          <form onSubmit={handleSubmit(onSubmit)} className="w-[517px]">
+            <Box
+              display={"flex"}
+              width={"100%"}
+              gap={1}
+              justifyContent={"center"}
+              flexDirection={"column"}
             >
-              Cadastre-se
-            </Link>
-          </Box>
-        </form>
+              <Typography fontSize={"24px"} color={"#515255"}>
+                Faça login com email
+              </Typography>
+              <Controller
+                control={control}
+                name="email"
+                render={({ field }) => (
+                  <TextField label={"Email"} fullWidth {...field} />
+                )}
+              />
+              <Controller
+                control={control}
+                name="password"
+                render={({ field }) => (
+                  <TextField
+                    label={"Senha"}
+                    fullWidth
+                    {...field}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={handleShowPassword}
+                            edge="end"
+                          >
+                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
+                    type={showPassword ? "text" : "password"}
+                  />
+                )}
+              />
+              <Button variant={"contained"} size={"large"} type={"submit"}>
+                Entrar
+              </Button>
+              <Link
+                href={"/signup"}
+                style={{
+                  width: "100%",
+                  marginRight: "auto",
+                  color: "lightgray",
+                }}
+              >
+                Cadastre-se
+              </Link>
+            </Box>
+          </form>
+        </Box>
       </Box>
-    </Box>
+    </GoogleOAuthProvider>
   );
 }
 
