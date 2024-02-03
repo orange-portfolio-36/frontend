@@ -4,3 +4,5 @@ export interface SignupData {
   email: string;
   password: string;
 }
+
+export type SigninData = Pick<SignupData, "email" | "password">;
