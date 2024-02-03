@@ -8,6 +8,11 @@
     text-decoration: none;
     color: inherit;
   }
+
+   body {
+    width: 100%;
+    height: 100vh;
+  }
 }
 
 @layer utilities {
