@@ -101,7 +101,7 @@ export default function SignupForm() {
           justifyContent={"center"}
         >
           <Typography fontSize={"48px"}>Entre no Orange Portfólio</Typography>
-          <GoogleLogin onSuccess={onGoogleSuccess}/>
+          <GoogleLogin onSuccess={onGoogleSuccess} />
           <form onSubmit={handleSubmit(onSubmit)} className="w-[517px]">
             <Box
               display={"flex"}

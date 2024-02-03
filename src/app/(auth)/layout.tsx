@@ -4,7 +4,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 
 export const metadata: Metadata = {
-  title: "Orange Portfólio",
+  title: "Sign - Orange Portfólio",
   description:
     "Compartilhe seus projetos e monte o seu portfólio profissional.",
 };
@@ -18,7 +18,7 @@ export default function RootLayout({
     <html lang="pt-br">
       <CssBaseline />
       <body>
-        <Box maxWidth={"100%"} height="100%">
+        <Box component={'main'} maxWidth={"100%"} height="100%">
           {children}
         </Box>
       </body>

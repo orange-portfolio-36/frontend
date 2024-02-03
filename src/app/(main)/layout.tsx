@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import "./globals.css";
+import "../globals.css";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 
@@ -18,7 +18,13 @@ export default function RootLayout({
     <html lang="pt-br">
       <CssBaseline />
       <body>
-        <Box maxWidth={"100%"} height="100%" display={'flex'} flexDirection={'column'}>
+        <Box
+          component={"main"}
+          maxWidth={"100%"}
+          height="100%"
+          display={"flex"}
+          flexDirection={"column"}
+        >
           {children}
         </Box>
       </body>
