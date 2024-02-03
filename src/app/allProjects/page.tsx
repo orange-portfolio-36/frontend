@@ -1,5 +1,6 @@
 "use client"
 import { useState, useEffect } from "react";
+import Card from "@/components/ui/Card/Card";
 
 export default function page() {
 
@@ -37,19 +38,37 @@ export default function page() {
       
   }, []); 
 
-  console.log(state)
-
   return (
-    <div>
-      {state?.map((e) => (
-    <div key={e.id}>
-     {e.name}
-     {e.ProjectTag.map((t) => (
-            <span key={t.tagId}>{t.Tag.name}</span>
-          ))}
-    </div>
-  ))}
-    </div>
+
+    <>
+
+  <Card>
+    <span>
+    Junte-se à comunidade de inovação, inspiração e descobertas, transformando experiências em conexões inesquecíveis
+    </span>
+  </Card>
+    
+    
+    <Card className="w-[389px] h-[290px] bg-lime-500">
+  
+  {state.map(e => (
+      <div key={e.id} >
+  
+        <img src={e.url_image} alt="image of project" className="w-[389px] h-[258px]" />
+  
+  
+        
+        
+      </div>
+    ))}
+  
+    
+      
+    </Card>
+    </>
+
+  
+  
   )
 }
 
