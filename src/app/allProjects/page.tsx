@@ -1,6 +1,7 @@
 "use client"
 import { useState, useEffect } from "react";
 import Card from "@/components/ui/Card/Card";
+import TextField from "@/components/ui/TextField/TextField";
 import 'tailwindcss/tailwind.css'
 
 
@@ -49,6 +50,12 @@ export default function page() {
         transformando experiências em conexões inesquecíveis
         </div>
 
+        <div className="w-[100%] h-auto mt-[50px] flex "  >
+          <TextField className="w-[312px] h-[56px] rounded-[4px] border-[1px] m-auto " placeholder="Buscar tags" />
+        </div>
+
+        
+
         <div  >
           {state.map((t,i) => (
             <Card key={t.id} className=" w-[312px] h-[298px] mt-[30px] m-auto" >
@@ -71,7 +78,7 @@ export default function page() {
               </div>
 
               <div  className="  w-[94px] h-[32px] flex justify-end  "> 
-                <div className="w-[46px] h-[32px] bg-silver-400 bg-slate-400 rounded-[100px] text-center  flex align-center  p-[4px]" >
+                <div className="w-[46px] h-[32px] bg-silver-400 bg-slate-200 rounded-[100px] text-center  flex align-center  p-[4px]" >
                  <div className="w-[38px] h-[24px] mt-auto " >{t.ProjectTag.map(e => e.Tag.name)}</div> 
                   </div>
                </div>
