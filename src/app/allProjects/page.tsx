@@ -44,21 +44,19 @@ export default function page() {
   return (
 
     <>
-        <div className="w-[312px] h-[120px] mt-[128px] 
-        font-sans font-normal text-2xl/[24px] text-center m-auto" >
+        <div className="w-[312px] md:w-[744px] h-[120px] md:h-[102px]  mt-[128px] md:t-[185px]
+        font-sans font-normal  text-2xl/[24px] md:text-[34px]/[34px] text-center m-auto" >
         Junte-se à comunidade de inovação, inspiração e descobertas, 
         transformando experiências em conexões inesquecíveis
         </div>
 
-        <div className="w-[100%] h-auto mt-[50px] flex "  >
-          <TextField className="w-[312px] h-[56px] rounded-[4px] border-[1px] m-auto " placeholder="Buscar tags" />
+        <div className="w-[100%] md:w-[50%] h-auto mt-[50px] md:mt-[120px] flex md:ml-[18px] "  >
+          <TextField className="w-[312px] md:w-[723px] h-[56px] rounded-[4px] border-[1px] m-auto md:m-[1px]  " placeholder="Buscar tags" />
         </div>
 
-        
-
-        <div  >
+        <div className="md:mt-[17px] md:grid md:grid-cols-3 md:gap-8" >
           {state.map((t,i) => (
-            <Card key={t.id} className=" w-[312px] h-[298px] mt-[30px] m-auto" >
+            <Card key={t.id} className=" w-[312px] md:w-[389px] h-[298px] md:h-[290px] mt-[30px] m-auto border-none shadow-none " >
 
             <img  src={t.url_image} alt="image of project" className="w-[100%] h-[80%]" />
 
