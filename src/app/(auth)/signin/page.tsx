@@ -25,6 +25,7 @@ import {
   GoogleOAuthProvider,
 } from "@react-oauth/google";
 import { clientId } from "@/config/google.config";
+import { signIn } from "next-auth/react";
 
 export default function SignupForm() {
   const { control, handleSubmit } = useForm<SigninData>({
@@ -43,9 +44,7 @@ export default function SignupForm() {
   const [showPassword, setShowPassword] = useState(false);
 
   function onSubmit(data: SigninData) {
-    userService.signin(data).then(() => {
-      handleSnackOpen();
-    });
+    signIn("credentials", { redirect: false, ...data });
   }
 
   function onGoogleSuccess(credentials: CredentialResponse) {
