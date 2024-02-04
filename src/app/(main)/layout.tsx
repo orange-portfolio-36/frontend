@@ -3,6 +3,7 @@ import "../globals.css";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 
+
 export const metadata: Metadata = {
   title: "Orange Portfólio",
   description:

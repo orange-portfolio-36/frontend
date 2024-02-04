@@ -1,5 +1,5 @@
 export default function Home(){
   return (
-    <main>Home</main>
+    <main className="w-[200px] h-[200px] bg-green-500" >Home</main>
   )
 }
