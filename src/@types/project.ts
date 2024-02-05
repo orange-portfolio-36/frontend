@@ -6,7 +6,7 @@ export interface Project {
   url_image: string;
   userId: number;
   createdAt: Date;
-  ProjectTag: ProjectTag
+  ProjectTag: ProjectTag[]
   User: {
     firstName: string;
     lastName: string;
@@ -14,7 +14,7 @@ export interface Project {
 }
 
 interface ProjectTag {
-  Tag: Tag;
+  Tag: Tag[];
   projectId: number;
   tagId: number;
 }
