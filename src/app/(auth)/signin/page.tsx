@@ -9,8 +9,7 @@ import Typography from "@mui/material/Typography";
 import Snackbar, { SnackbarOrigin } from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import Button from "@/components/ui/Button/Button";
-import { SigninData, SignupData } from "@/@types/user";
-import { userService } from "@/services/userService";
+import { SigninData } from "@/@types/user";
 import {
   CheckCircleOutline,
   Visibility,
@@ -25,9 +24,10 @@ import {
   GoogleOAuthProvider,
 } from "@react-oauth/google";
 import { clientId } from "@/config/google.config";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 
 export default function SignupForm() {
+  const session = useSession();
   const { control, handleSubmit } = useForm<SigninData>({
     defaultValues: {
       email: "",
@@ -44,12 +44,14 @@ export default function SignupForm() {
   const [showPassword, setShowPassword] = useState(false);
 
   function onSubmit(data: SigninData) {
-    signIn("credentials", { redirect: false, ...data });
+    signIn("credentials", { redirect: false, ...data }).then((data) => {
+      if (data && data.ok) handleSnackOpen();
+    });
   }
 
   function onGoogleSuccess(credentials: CredentialResponse) {
-    userService.googleLogin(credentials).then(() => {
-      handleSnackOpen();
+    signIn("credentials", { redirect: false, ...credentials }).then((data) => {
+      if (data && data.ok) handleSnackOpen();
     });
   }
 

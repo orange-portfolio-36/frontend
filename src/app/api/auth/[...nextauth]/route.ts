@@ -1,8 +1,7 @@
 import NextAuth, { User } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-import { CustomSession, SigninData, SigninResponse } from "@/@types/user";
+import { CustomSession, SigninResponse } from "@/@types/user";
 import { userService } from "@/services/userService";
-import { GoogleCredentialResponse } from "@react-oauth/google";
 
 const handler = NextAuth({
   providers: [
@@ -11,29 +10,31 @@ const handler = NextAuth({
       credentials: {
         email: { label: "Email", type: "text" },
         password: { label: "Senha", type: "password" },
-      },
-      async authorize(credentials, req) {
-        if (!credentials) return null;
-        const body = credentials as SigninData;
-        const { data, status } = await userService.signin(body);
-
-        if (status !== 200) return null;
-        return data as User;
-      },
-    }),
-    Credentials({
-      name: "google",
-      credentials: {
-        clientId: { label: "id", type: "text" },
+        clientId: { label: "ID", type: "text" },
         credential: { label: "token", type: "text" },
       },
       async authorize(credentials, req) {
         if (!credentials) return null;
-        const body = credentials as GoogleCredentialResponse;
-        const { data, status } = await userService.googleLogin(body);
+        let response;
+        try {
+          if (!credentials?.email) {
+            response = await userService.googleLogin({
+              clientId: credentials.clientId,
+              credential: credentials.credential,
+            });
+          } else {
+            response = await userService.signin({
+              email: credentials.email,
+              password: credentials.password,
+            });
+          }
 
-        if (status !== 200) return null;
-        return data as User;
+          if (response.status !== 200) return null;
+          return response.data as User;
+        } catch (error) {
+          console.log(error);
+        }
+        return null;
       },
     }),
   ],
@@ -43,11 +44,11 @@ const handler = NextAuth({
   },
   callbacks: {
     jwt: async ({ token, user }) => {
-      const { token: jwt } = user as SigninResponse;
+      const data = user as SigninResponse;
       if (user) {
         return {
           ...token,
-          jwt,
+          jwt: data.jwt,
         };
       }
       return token;
