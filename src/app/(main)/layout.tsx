@@ -21,7 +21,7 @@ export default function RootLayout({
       <CssBaseline />
       <body>
         <Header />
-        <Container maxWidth={"xl"} sx={{ height: "calc(100% - 79px)" }}>
+        <Container maxWidth={"lg"} sx={{ height: "calc(100% - 79px)", marginTop: '79px' }}>
           <Box
             component={"main"}
             maxWidth={"100%"}

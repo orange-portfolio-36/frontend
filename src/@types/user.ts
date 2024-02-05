@@ -19,3 +19,4 @@ export interface SigninResponse {
 export interface CustomSession extends DefaultSession {
   jwt: string;
 }
+

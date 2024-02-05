@@ -154,7 +154,7 @@ export default function SignupForm() {
                 style={{
                   width: "100%",
                   marginRight: "auto",
-                  color: "lightgray",
+                  color: "#818388",
                 }}
               >
                 Cadastre-se
