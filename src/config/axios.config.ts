@@ -18,7 +18,6 @@ const requestNextApi = axios.create({
 requestNextApi.interceptors.request.use(
   async (config) => {
     const session = (await getSession()) as CustomSession;
-    console.log("session", session);
     if (session) {
       config.headers.Authorization = `Bearer ${session.jwt}`;
     }

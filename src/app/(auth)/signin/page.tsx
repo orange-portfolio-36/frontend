@@ -24,11 +24,10 @@ import {
   GoogleOAuthProvider,
 } from "@react-oauth/google";
 import { clientId } from "@/config/google.config";
-import { signIn, signOut, useSession } from "next-auth/react";
-import { requestNextApi } from "@/config/axios.config";
+import { signIn, useSession } from "next-auth/react";
 
 export default function SignupForm() {
-  const session =  useSession();
+  const session = useSession();
   const { control, handleSubmit } = useForm<SigninData>({
     defaultValues: {
       email: "",
@@ -45,18 +44,15 @@ export default function SignupForm() {
   const [showPassword, setShowPassword] = useState(false);
 
   function onSubmit(data: SigninData) {
-    signIn("credentials", { redirect: false, ...data,  }).then((data) => {
-      console.log(data);
-      handleSnackOpen();
+    signIn("credentials", { redirect: false, ...data }).then((data) => {
+      if (data && data.ok) handleSnackOpen();
     });
   }
 
   function onGoogleSuccess(credentials: CredentialResponse) {
-    signIn("credentials", { redirect: false, ...credentials }).then(
-      () => {
-        handleSnackOpen();
-      }
-    );
+    signIn("credentials", { redirect: false, ...credentials }).then((data) => {
+      if (data && data.ok) handleSnackOpen();
+    });
   }
 
   function handleShowPassword() {
@@ -105,7 +101,6 @@ export default function SignupForm() {
           alignItems={"center"}
           justifyContent={"center"}
         >
-          {JSON.stringify(session)}
           <Typography fontSize={"48px"}>Entre no Orange Portfólio</Typography>
           <GoogleLogin onSuccess={onGoogleSuccess} />
           <form onSubmit={handleSubmit(onSubmit)} className="w-[517px]">
@@ -153,20 +148,6 @@ export default function SignupForm() {
               />
               <Button variant={"contained"} size={"large"} type={"submit"}>
                 Entrar
-              </Button>
-              <Button
-                variant={"contained"}
-                size={"large"}
-                onClick={() => signOut()}
-              >
-                Sair
-              </Button>
-              <Button
-                variant={"contained"}
-                size={"large"}
-                onClick={() => requestNextApi.post('/api/project', {})}
-              >
-                Projetos
               </Button>
               <Link
                 href={"/signup"}
