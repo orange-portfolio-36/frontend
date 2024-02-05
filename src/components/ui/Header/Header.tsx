@@ -45,7 +45,7 @@ export default function Header() {
 
   return (
     <AppBar position="static" color="secondary">
-      <Container maxWidth="xl">
+      <Container maxWidth="lg">
         <Toolbar disableGutters>
           <Box sx={{ display: { xs: "none", md: "flex" }, flexGrow: 0.15 }}>
             <Image src={Logo} alt={"Orange logotipo"} />
