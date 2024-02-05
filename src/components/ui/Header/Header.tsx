@@ -44,7 +44,7 @@ export default function Header() {
   };
 
   return (
-    <AppBar position="static" color="secondary">
+    <AppBar position="fixed" color="secondary">
       <Container maxWidth="lg">
         <Toolbar disableGutters>
           <Box sx={{ display: { xs: "none", md: "flex" }, flexGrow: 0.15 }}>
