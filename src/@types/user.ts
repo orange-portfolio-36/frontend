@@ -1,3 +1,5 @@
+import { DefaultSession } from "next-auth";
+
 export interface SignupData {
   firstName: string;
   lastName: string;
@@ -6,3 +8,14 @@ export interface SignupData {
 }
 
 export type SigninData = Pick<SignupData, "email" | "password">;
+
+export interface SigninResponse {
+  name: string;
+  email: string;
+  id: string;
+  token: string;
+}
+
+export interface CustomSession extends DefaultSession {
+  jwt: string;
+}
