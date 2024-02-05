@@ -1,6 +1,5 @@
 import { CustomSession } from "@/@types/user";
 import axios from "axios";
-import { DefaultSession } from "next-auth";
 import { getSession } from "next-auth/react";
 
 const axiosInstance = axios.create({
@@ -10,9 +9,16 @@ const axiosInstance = axios.create({
   },
 });
 
-axiosInstance.interceptors.request.use(
+const requestNextApi = axios.create({
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
+requestNextApi.interceptors.request.use(
   async (config) => {
     const session = (await getSession()) as CustomSession;
+    console.log("session", session);
     if (session) {
       config.headers.Authorization = `Bearer ${session.jwt}`;
     }
@@ -22,5 +28,7 @@ axiosInstance.interceptors.request.use(
     return Promise.reject(error);
   }
 );
+
+export { requestNextApi };
 
 export default axiosInstance;

@@ -13,7 +13,7 @@ export interface SigninResponse {
   name: string;
   email: string;
   id: string;
-  token: string;
+  jwt: string;
 }
 
 export interface CustomSession extends DefaultSession {
