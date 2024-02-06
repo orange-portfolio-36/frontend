@@ -192,7 +192,7 @@ export default function Header() {
             ) : (
               <>
                 <Link href={"/signin"}>Login</Link>
-                <Link href={"/signup"}>Cadastra-se</Link>
+                <Link href={"/signup"}>Cadastre-se</Link>
               </>
             )}
           </Box>
