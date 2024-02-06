@@ -1,7 +1,16 @@
+'use client'
 import Button from "@/components/ui/Button/Button";
+import ModalGlobal from "@/components/ui/Modal/Modal";
+import ProjectForm from "@/components/ui/ProjectForm/ProjectForm";
 import { Avatar, Box, Typography } from "@mui/material";
+import { useState } from "react";
 
 export default function Profile() {
+  const [open, setOpen] = useState(false);
+
+  function onClose() {
+    setOpen(false);
+  }
   return (
     <Box
       data-testid="Profile"
@@ -10,6 +19,20 @@ export default function Profile() {
       justifyContent={"space-between"}
       height={"122px"}
     >
+      <ModalGlobal
+        open={open}
+        header={"Adicionar Projeto"}
+        onClose={onClose}
+        content={<ProjectForm />}
+        footer={
+          <Box display={"flex"} gap={2} width={"100%"}>
+            <Button variant="contained" type={'submit'} form="project-form">Salvar</Button>
+            <Button variant="contained" onClick={() => onClose()}>
+              Cancelar
+            </Button>
+          </Box>
+        }
+      />
       <Avatar
         alt="Usuário"
         src={"/static"}
@@ -31,7 +54,7 @@ export default function Profile() {
           </Typography>
           <Typography>Brasil</Typography>
         </Box>
-        <Button variant="contained" size="large" disableElevation>
+        <Button variant="contained" size="large" disableElevation onClick={() => setOpen(true)}>
           Adicionar Projeto
         </Button>
       </Box>

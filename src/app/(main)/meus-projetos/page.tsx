@@ -1,7 +1,9 @@
 import Profile from "@/components/user/Profile/Profile";
 import { Box } from "@mui/material";
+import { useState } from "react";
 
 export default function Projects() {
+
   return (
     <Box
       display={"flex"}
