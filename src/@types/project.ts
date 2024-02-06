@@ -6,12 +6,17 @@ export interface Project {
   url_image: string;
   userId: number;
   createdAt: Date;
-  ProjectTag: ProjectTag[]
+  ProjectTag: ProjectTag[];
   User: {
     firstName: string;
     lastName: string;
-  }
+  };
 }
+
+export type ProjectForm = Pick<
+  Project,
+  "name" | "url_project" | "url_image" | "description"
+> & { tags: Tag[] };
 
 interface ProjectTag {
   Tag: Tag[];
