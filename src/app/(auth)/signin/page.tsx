@@ -44,13 +44,13 @@ export default function SignupForm() {
   const [showPassword, setShowPassword] = useState(false);
 
   function onSubmit(data: SigninData) {
-    signIn("credentials", { redirect: false, ...data }).then((data) => {
+    signIn("credentials", { redirect: true, ...data, callbackUrl: '/meus-projetos' }).then((data) => {
       if (data && data.ok) handleSnackOpen();
     });
   }
 
   function onGoogleSuccess(credentials: CredentialResponse) {
-    signIn("credentials", { redirect: false, ...credentials }).then((data) => {
+    signIn("credentials", { redirect: true, ...credentials, callbackUrl: '/signin' }).then((data) => {
       if (data && data.ok) handleSnackOpen();
     });
   }
