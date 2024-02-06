@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "../globals.css";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
+import { Providers } from "@/providers/SessionProvider";
 
 export const metadata: Metadata = {
   title: "Sign - Orange Portfólio",
@@ -18,9 +19,11 @@ export default function RootLayout({
     <html lang="pt-br">
       <CssBaseline />
       <body>
-        <Box component={'main'} maxWidth={"100%"} height="100%">
-          {children}
-        </Box>
+        <Providers>
+          <Box component={"main"} maxWidth={"100%"} height="100%">
+            {children}
+          </Box>
+        </Providers>
       </body>
     </html>
   );
