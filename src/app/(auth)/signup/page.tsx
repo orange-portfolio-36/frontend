@@ -13,6 +13,7 @@ import { SignupData } from "@/@types/user";
 import { userService } from "@/services/userService";
 import { CheckCircleOutline } from "@mui/icons-material";
 import { useState } from "react";
+import Link from "next/link";
 
 export default function SignupForm() {
   const { control, handleSubmit } = useForm<SignupData>({
@@ -79,7 +80,7 @@ export default function SignupForm() {
         justifyContent={"center"}
       >
         <Typography fontSize={"48px"}>Cadastre-se</Typography>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} className="w-[517px]">
           <Box
             display={"flex"}
             gap={1}
@@ -90,13 +91,15 @@ export default function SignupForm() {
               <Controller
                 control={control}
                 name="firstName"
-                render={({ field }) => <TextField label={"Nome"} {...field} />}
+                render={({ field }) => (
+                  <TextField fullWidth label={"Nome"} {...field} />
+                )}
               />
               <Controller
                 control={control}
                 name="lastName"
                 render={({ field }) => (
-                  <TextField label={"Sobrenome"} {...field} />
+                  <TextField fullWidth label={"Sobrenome"} {...field} />
                 )}
               />
             </Box>
@@ -123,6 +126,9 @@ export default function SignupForm() {
             <Button variant={"contained"} size={"large"} type={"submit"}>
               Cadastrar
             </Button>
+            <Link href={'/signin'}>
+              <Typography>Voltar para o login</Typography>
+            </Link>
           </Box>
         </form>
       </Box>

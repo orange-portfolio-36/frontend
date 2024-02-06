@@ -22,7 +22,7 @@ export default function ProjectList() {
       project.ProjectTag.some((item) => tagsIds.includes(item.tagId))
     );
     return tagsIds.length > 0 ? filter : projects;
-  }, [selectedTags]);
+  }, [selectedTags, projects]);
 
   async function fetchProjects() {
     const { data } = await projectService.getAllProjects();
@@ -47,6 +47,7 @@ export default function ProjectList() {
       justifyContent={"center"}
       marginTop={"120px"}
       flexDirection={"column"}
+      width={'100%'}
     >
       <Autocomplete
         sx={{ width: "50%", marginBottom: "40px" }}

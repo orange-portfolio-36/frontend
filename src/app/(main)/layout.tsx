@@ -4,6 +4,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Header from "@/components/ui/Header/Header";
 import { Container } from "@mui/material";
+import { Providers } from "@/providers/SessionProvider";
 
 export const metadata: Metadata = {
   title: "Orange Portfólio",
@@ -20,18 +21,23 @@ export default function RootLayout({
     <html lang="pt-br">
       <CssBaseline />
       <body>
-        <Header />
-        <Container maxWidth={"lg"} sx={{ height: "calc(100% - 79px)", marginTop: '79px' }}>
-          <Box
-            component={"main"}
-            maxWidth={"100%"}
-            height="100%"
-            display={"flex"}
-            flexDirection={"column"}
+        <Providers>
+          <Header />
+          <Container
+            maxWidth={"lg"}
+            sx={{ height: "calc(100% - 79px)", marginTop: "79px" }}
           >
-            {children}
-          </Box>
-        </Container>
+            <Box
+              component={"main"}
+              maxWidth={"100%"}
+              height="100%"
+              display={"flex"}
+              flexDirection={"column"}
+            >
+              {children}
+            </Box>
+          </Container>
+        </Providers>
       </body>
     </html>
   );

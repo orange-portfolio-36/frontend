@@ -3,7 +3,7 @@ import { Box, Typography } from "@mui/material";
 
 export default function Home() {
   return (
-    <Box display={"flex"} flexDirection={"column"} alignItems={"center"}>
+    <Box display={"flex"} flexDirection={"column"} alignItems={"center"} width={'100%'}>
       <Typography
         fontSize={"32px"}
         textAlign={"center"}
